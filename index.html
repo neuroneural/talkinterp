@@ -28,7 +28,7 @@
   <!-- Code syntax highlighting -->
   <link rel="stylesheet" href="plugin/highlight/atom-one-light.css" id="highlight-theme">
   <!-- <link rel="stylesheet" href="lib/css/zenburn.css"> -->
-  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/custom.css?v=4">
   <link rel="stylesheet" href="dist/theme/aml.css" id="theme">
   <!-- Printing and PDF exports -->
   <script>
@@ -45,29 +45,427 @@
 
 <body>
   <div class="reveal">
+    <div class="ocean">
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div>
     <!-- In between the <div="reveal"> and the <div class="slides">-->
     <!-- <header style="position: absolute; top: 10px; left: 100px; z-index: 500; font-size:100px;background-color: rgba(0,0,0,0); text-align: center !important"></header>  -->
     <!-- In between the <div="reveal"> and the <div class="slides">-->
     <!-- Any section element inside of this container is displayed as a slide #93a1a1 -->
     <div class="slides">
-      <section>
-        <section>
+      <section data-state="ocean-view">
+        <section data-background="figures/symposium.png" data-background-size="cover" data-background-opacity=0.15
+          class="desaturated-bg">
           <p>
-          <h2 style="color: #000000">Message in a Bottleneck</h2>
-          <div class="center">
-            <img style="bottom=0; width=100%; box-shadow: 0px 0px 0px
-                                rgba(150, 150, 255,0.8);
-                                border:0;" width="60%" src="figures/TReNDS_logo_light.png" alt="TReNDS">
-          </div>
-          <div style="color: #000000">
+          <h1 style="width: 120%; margin-left: -10%; white-space: nowrap;">Message in a Bottleneck</h1>
+          <h2 style="color: #586e75; margin-top: 20px;">Architected Interpretability ArchInterp for Neuroimaging</h2>
+
+
+          <div>
             Sergey Plis
           </div>
           <p>
-            <img style="border:0; box-shadow: 0px 0px 0px;" width="200" src="figures/GSU.png" alt="logo">
-            <img style="border:0; box-shadow: 0px 0px 0px
-                                rgba(150, 150, 255, 0.8);" height="100" src="figures/neuroneural_logo.png"
+
+            <img style="border:0; position: relative; z-index: 10; box-shadow: 0px 0px 0px
+                                rgba(150, 150, 255, 0.8);" height="200" src="figures/neuroneural_logo.png"
               alt="Neuroneural">
         </section>
+      </section>
+      <section>
+        <section data-background="figures/2012_news.png" data-background-size="contain" data-vertical-align-top>
+        </section>
+        <section>
+          <h1 class="fragment">We were confused</h1>
+          <ul style="list-style-type: square;
+		   list-style-position: inside;
+		   font-size:50px;
+		   font-variant: small-caps;
+                   display: inline-block;
+                   text-align: left;
+                   white-space: nowrap;">
+            <li>Can Deep Learning do what we do already?</li>
+            <li>Can it do more?</li>
+            <li>What can it do for subject populations?</li>
+            <li>Do we have enough data?</li>
+            <li>What can it do for single subjects?</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>main question</h3>
+          <h2>Can we learn from the model something about the data that we did not explicitly teach it?</h2>
+        </section>
+
+        <section>
+          <h2>higher level concepts</h2>
+          <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
+					      rgba(150, 150, 255,
+					      0.8);" width="700" src="figures/concepts.png" alt="loop">
+        </section>
+
+        <section data-transition="slide-in fade-out" data-background="figures/raw.jpg" data-background-size="contain">
+          <h3 style="background-color: rgba(255, 255, 255, 0.7);">harder to interpret for fMRI</h3>
+        </section>
+
+        <section data-transition="fade-in slide-out">
+          <h3>MNIST dataset</h3>
+          <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
+					      rgba(150, 150, 255,
+					      0.8);" width="700" src="figures/MNIST.png" alt="loop">
+        </section>
+
+        <section data-transition="slide-in fade-out">
+          <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
+					      rgba(150, 150, 255,
+					      0.8);" width="700" src="figures/tsne_b.png" alt="loop">
+          <div class="footer">
+            Maaten, L.V.D. and Hinton, G., 2008. Visualizing data using t-SNE. Journal of machine learning research,
+            9(Nov), pp.2579-2605.
+          </div>
+        </section>
+
+        <section data-transition="fade-in slide-out">
+          <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
+					      rgba(150,    150,   255,
+					      0.8);" width="700" src="figures/tsne_c.png" alt="loop">
+          <div class="footer">
+            Maaten, L.V.D. and Hinton, G., 2008. Visualizing data using t-SNE. Journal of machine learning research,
+            9(Nov), pp.2579-2605.
+          </div>
+        </section>
+
+        <section>
+          <h2>400 brains</h2>
+          <h3>schizophrenia vs. healthy controls</h3>
+          <div class="footer">
+            Plis SM, Hjelm DR, Salakhutdinov R, Allen EA, Bockholt HJ, Long JD, Johnson HJ, Paulsen JS, Turner JA,
+            Calhoun VD. Deep learning for neuroimaging: a validation study. Frontiers in neuroscience. 2014 Aug
+            20;8:229.
+          </div>
+        </section>
+
+        <section data-background="figures/deep_learning_divide_and_concur_loop.gif" data-background-size="contain"
+          data-vertical-align-top>
+          <h3>depth effect (dynamic)</h3>
+          <div class="footer">
+            Plis SM, Hjelm DR, Salakhutdinov R, Allen EA, Bockholt HJ, Long JD, Johnson HJ, Paulsen JS, Turner JA,
+            Calhoun VD. Deep learning for neuroimaging: a validation study. Frontiers in neuroscience. 2014 Aug
+            20;8:229.
+          </div>
+        </section>
+
+        <section data-background="figures/static_depth.png" data-background-size="contain" data-vertical-align-top>
+          <h3>depth effect (static)</h3>
+          <div class="footer">
+            Plis SM, Hjelm DR, Salakhutdinov R, Allen EA, Bockholt HJ, Long JD, Johnson HJ, Paulsen JS, Turner JA,
+            Calhoun VD. Deep learning for neuroimaging: a validation study. Frontiers in neuroscience. 2014 Aug
+            20;8:229.
+          </div>
+        </section>
+
+        <section>
+          <h2>3500 brains</h2>
+          <h3>Huntington's disease</h3>
+          <div class="footer">
+            Plis SM, Hjelm DR, Salakhutdinov R, Allen EA, Bockholt HJ, Long JD, Johnson HJ, Paulsen JS, Turner JA,
+            Calhoun VD. Deep learning for neuroimaging: a validation study. Frontiers in neuroscience. 2014 Aug
+            20;8:229.
+          </div>
+        </section>
+
+        <section>
+          <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
+                                              rgba(150, 150, 255, 0.8);" width="700" src="figures/HDgene.png"
+            alt="loop">
+        </section>
+
+        <section>
+          <h2>severity within prodromal HD</h2>
+          CAG-length Age Product (CAP) score
+          <ul>
+            <li class="fragment roll-in"> <em>Low
+                score</em> <br> very similar to healthy controls in
+              cognitive and motor performance </li>
+            <li class="fragment roll-in"> <em>Medium
+                score</em> <br> increasing deficit </li>
+            <li class="fragment roll-in"> <em>High
+                score</em> <br> largest deficit in cognitive and
+              motor performance though not yet clinically diagnosable </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>gray matter concentration differences by group</h3>
+          <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
+                                              rgba(150, 150, 255, 0.8);" width="700" src="figures/medium_high.png"
+            alt="loop">
+        </section>
+
+
+        <section data-background="figures/low_medium_high.svg" data-background-size="contain" data-vertical-align-top>
+        </section>
+
+        <section data-background="figures/bsnip.png" data-background-size="contain" data-vertical-align-top>
+          <h2 style="margin-left:-1300px; margin-top:600px;">B-SNIP</h2>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>status quo</h1>
+        </section>
+
+        <section data-background="figures/general_comparison_fin.svg" data-background-size="contain"
+          data-vertical-align-top>
+        </section>
+
+        <section>
+          <h3>A Simple but tough to beat predictive model</h3>
+          <div id="header-left" style="margin-left: -100px; margin-top: -50px">
+            <img src="figures/Pavel.png" alt="Pavel Popov"
+              style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 1); margin-bottom: -5%" width="160px">
+            <div style="font-size:10pt;">Pavel Popov</div>
+          </div>
+          <row style="margin-top: -20pt; width: 130%">
+            <col40>
+              <img class="stretch" style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8);" width="100%"
+                src="figures/meanMLPmodel.svg" alt="task">
+            </col40>
+            <col60 style="margin-top: -20pt; width: 130%">
+              <div class="fragment zoom-in" style="margin-top: 10px; margin-left: 50px; width: 80%">
+                <img class="stretch" style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8);" width="100%"
+                  src="figures/general_comparison_fin.svg" alt="task">
+                <img class="stretch"
+                  style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8); margin-top: -25pt;" width="80%"
+                  src="figures/cross_comparison.svg" alt="task">
+              </div>
+            </col60>
+          </row>
+          <div class="slide-footer" style="margin-bottom:-40px;">
+            Popov P, Mahmood U, Fu Z, Yang C, Calhoun V, Plis S. A simple but tough-to-beat baseline for fMRI
+            time-series classification. NeuroImage. 2024 Dec 1;303:120909.
+          </div>
+        </section>
+
+        <section data-vertical-align-top>
+          <h3>AI for Knowledge discovery</h3>
+          <img class="stretch" style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8);" width="100%"
+            src="figures/learning_from_models.svg" alt="Learning to predict">
+          <row style="margin-top:-30pt;">
+            <col50>
+              <img class="stretch" style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8);" width="100%"
+                src="figures/ica-components-subset.png" alt="Learning to predict">
+            </col50>
+            <col50>
+              <img class="stretch" style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8);" width="100%"
+                src="figures/ICA_TC_example.svg" alt="Learning to predict">
+            </col50>
+          </row>
+          <div class="slide-footer" style="font-size:9pt; margin-bottom:-20pt;">
+            <ol>
+              <li> Vellido, A. The importance of interpretability and visualization in machine learning for applications
+                in medicine and health care. Neural computing applications 1–15 (2019).
+              <li> Singh, A., Sengupta, S. & Lakshminarayanan, V. Explainable deep learning models in medical image
+                analysis. J. Imaging 6, 52 (2020).
+              <li> Samek, W., Montavon, G., Lapuschkin, S., Anders, C. J. & Müller, K.-R. Towardf interpretable machine
+                learning: Transparent deep neural networks and beyond. arXiv preprint arXiv:2003.07631 (2020).
+            </ol>
+          </div>
+        </section>
+
+        <section data-background="figures/explainability_review.svg" data-background-size="contain"
+          data-vertical-align-top>
+          <h2 style="margin-top: -70px;">interpretability: a thriving field</h2>
+          <div class="slide-footer" style="margin-bottom:-50px;">
+            Rahman, M., Calhoun, V. and Plis, S., 2026. Deep Learning Interpretability in Neuroimaging: A Comprehensive
+            Survey and Methodological Recommendations. Imaging Neuroscience.
+          </div>
+        </section>
+
+        <section>
+          <h2>Two types of eXplainable AI</h2>
+          <row>
+            <col50>
+              <h4>Explain the data</h4>
+              <img class="stretch" style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8);" width="100%"
+                src="figures/explanation_examples.svg" alt="task">
+            </col50>
+            <col50>
+              <h4>Interpret the model</h4>
+              <img class="stretch" style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8);" width="100%"
+                src="figures/PCA_spring.gif" alt="task">
+            </col50>
+          </row>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>ArchInterp</h1>
+        </section>
+
+        <section data-state="brightside">
+          <h3>Graphs as Interpretable Representations</h3>
+          <row style="margin-top: -30px;">
+            <col30 class="fragment roll-in" data-fragment-index="1">
+              <div style="font-size:14pt;">genetic network</div>
+              <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
+			    rgba(150, 150, 255, 0.8); justify-content: center;" width="80%" src="figures/covid_genes.png" alt="COVID SNPs">
+            </col30>
+            <col30 class="fragment roll-in" data-fragment-index="2">
+              <div style="font-size:14pt;">networks of chess games</div>
+              <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
+			    rgba(150, 150, 255, 0.8); justify-content: center;" width="80%" src="figures/chess_masters_001.png"
+                alt="chess masters">
+            </col30>
+            <col30 class="fragment roll-in" data-fragment-index="3">
+              <div style="font-size:14pt;">philosophy network</div>
+              <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
+			    rgba(150, 150, 255, 0.8); justify-content: center;" width="80%" src="figures/Philosophy_graph.png"
+                alt="history of philosophy">
+            </col30>
+          </row>
+          <row style="margin-top: -30px;">
+            <col30 class="fragment roll-in" data-fragment-index="4">
+              <div style="font-size:14pt;">W3C specs</div>
+              <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
+			    rgba(150, 150, 255, 0.8); justify-content: center;" width="100%" src="figures/wsa_concepts_www.png"
+                alt="W3C specs">
+            </col30>
+            <col30 class="fragment roll-in" data-fragment-index="5">
+              <div style="font-size:14pt;">Titanic survival DT</div>
+              <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
+			    rgba(150, 150, 255, 0.8); justify-content: center;" width="100%" src="figures/TitanicDecisionTree.png"
+                alt="Decision Tree">
+            </col30>
+            <col30 class="fragment roll-in" data-fragment-index="6">
+              <div style="font-size:14pt;">Neural Net</div>
+              <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
+			    rgba(150, 150, 255, 0.8); justify-content: center;" width="100%"
+                src="figures/neural-network-architecture_graph.png" alt="Neural Net">
+            </col30>
+          </row>
+          <!-- <div class="slide-footer" style="font-size:9pt;"> -->
+          <!--     1. Taylor K, Das S, Pearson M, Kozubek J, Pawlowski M, Jensen CE, Skowron Z, Møller GL, Strivens M, Gardner S. Analysis of genetic host response risk factors in severe COVID-19 patients. medRxiv. 2020 Jan 1.<br> -->
+          <!--     2. <a href="https://networkx.org/documentation/stable/auto_examples/drawing/plot_chess_masters.html#sphx-glr-auto-examples-drawing-plot-chess-masters-py">Chess Masters in NetworkX</a> -->
+          <!--     3. <a href="https://igarciniacambogia.blogspot.com/2020/06/pre-socratic-graph.html">History of Philosophy</a> -->
+          <!--     4. <a href="https://www.w3.org/2003/Talks/0818-msm-ws/slide19-0.html">W3C slides</a> -->
+          <!--     5. <a hred="https://medium.com/analytics-vidhya/variable-importance-with-tree-models-random-forest-with-python-cb775d019977">DT source</a> -->
+          <!--     6. <a href="https://www.syncfusion.com/succinctly-free-ebooks/neuralnetworks/feed-forward">NN source</a> -->
+          <!-- </div> -->
+          <aside class="notes">
+            1. COVID-associated SNPs (circles) and co-association in patients (edges), colours = distinct patient
+            sub-populations.<br>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Architected Interpretability with Graphs</h3>
+          <ul style="list-style-type: none; font-size: 19pt">
+            <li class="fragment roll-in"> To see through a black box model we need a window
+              <div align="center">
+                <img class="stretch"
+                  style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8);position: relative; margin:0 auto;"
+                  width="100%" src="figures/glass_box_into_mouse.png" alt="windowed">
+              </div>
+            <li class="fragment roll-in"> Our window is a graph, but we want the model to use it too
+              <div align="center">
+                <img class="stretch" style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8);" width="100%"
+                  src="figures/glass_box_layer.svg" alt="windowed">
+              </div>
+          </ul>
+        </section>
+
+        <section>
+          <row>
+            <col50>
+              <h4>windowless directed connectivity</h4>
+              <img class="stretch" style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8);" width="85%"
+                src="figures/Decennt.svg" alt="task">
+            </col50>
+            <col50 class="fragment" data-fragment-index="0">
+              <h4>spatiotemporal connectivity</h4>
+              <img class="stretch" style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8);" width="100%"
+                src="figures/glacier_model.svg" alt="task">
+            </col50>
+          </row>
+        </section>
+
+        <section>
+          <div id="header-right" style="margin-right: -150px; margin-top: -20px">
+            <img src="figures/Usman.png" alt="Usman Mahmood"
+              style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 1); margin-bottom: -5%" width="160px">
+            <div style="font-size:10pt;">Usman Mahmood</div>
+          </div>
+
+          <h3>Interpretable glass-box layer <alert>for brains</alert>
+          </h3>
+          <row style="margin-top: -30px;">
+            <div align="center">
+              <img class="stretch" style="border:0; box-shadow: 0px 0px 0px                                          rgba(150, 150, 255,
+                                          0.8);" width="80%" src="figures/taskENC.svg" alt="task">
+            </div>
+          </row>
+          <row style="margin-top: -30px;">
+            <div align="center">
+              <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
+                                          rgba(150, 150, 255,
+                                          0.8);" width="70%" src="figures/FBIRNConnect.svg" alt="task">
+            </div>
+          </row>
+          <row>
+            <col50>
+            </col50>
+            <col50>
+            </col50>
+          </row>
+          <div class="slide-footer" style="margin-bottom:-40px; font-size:8pt;">
+            Mahmood U, Fu Z, Calhoun V, Plis S. Glacier: glass-box transformer for interpretable dynamic neuroimaging.
+            InICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) 2023
+            Jun 4 (pp. 1-5). IEEE.<br>
+            Mahmood U, Fu Z, Ghosh S, Calhoun V, Plis S. Through the looking glass: Deep interpretable dynamic directed
+            connectivity in resting fMRI. NeuroImage. 2022 Dec 1;264:119737.
+          </div>
+        </section>
+
+        <section data-vertical-align-top>
+          <div id="header-right" style="margin-right: -150px; margin-top: -20px">
+            <img src="figures/Pavel.png" alt="Pavel Popov"
+              style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 1); margin-bottom: -5%" width="160px">
+            <div style="font-size:10pt;">Pavel Popov</div>
+          </div>
+
+          <h2>Archinterp with "Causal" graphs</h2>
+          <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
+                                              rgba(150, 150, 255,
+                                              0.8);" width="80%" src="figures/model_diagram_DECIFRA.svg" alt="loop">
+        </section>
+
+        <section data-vertical-align-top data-background-size="contain" data-background="figures/decifra_result.png">
+          <div id="header-right" style="margin-right: -100px; margin-top: -20px">
+            <img src="figures/Pavel.png" alt="Pavel Popov"
+              style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 1); margin-bottom: -5%" width="160px">
+            <div style="font-size:10pt;">Pavel Popov</div>
+          </div>
+        </section>
+
+      </section>
+
+      <section>
+        <section>
+          <h1>What's next?</h1>
+        </section>
+
+        <section data-background="figures/multimodal_archinterp.svg" data-background-size="contain" data-vertical-align-top>
+        </section>
+      </section>
+
+
+      <section>
+        <section data-background="figures/the_team25.svg" data-background-size="contain" data-vertical-align-top>
+        </section>
+
       </section>
     </div>
 
@@ -231,7 +629,7 @@
     <div id="header">
       <div id="header-left">
         <img style="border:0; box-shadow: 0px 0px 0px
-			      rgba(150, 150, 255,0.8);" width="150" src="figures/BRAINCHOP.png" alt="brainchop">
+			      rgba(150, 150, 255,0.8);" width="150" src="figures/GSU.png" alt="GSU">
       </div>
       <div id="header-right">
         <img style="border:0; box-shadow: 0px 0px 0px
