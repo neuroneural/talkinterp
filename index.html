@@ -13,9 +13,9 @@
   <!-- Load d3.js -->
   <script src="https://d3js.org/d3.v7.js"></script>
 
-  <title>ArchInterp Presentation</title>
+  <title>Message in a Bottleneck</title>
 
-  <meta name="description" content="A presentation on architected interpretability">
+  <meta name="description" content="Message in a bottleneck: architected interpretability for brain dynamics. IMSI, November 2026">
   <meta name="author" content="Sergey M Plis">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -40,6 +40,33 @@
   </script>
 
 
+  <style>
+    /* IMSI 2026 additions: scoped helpers, same palette as aml.css */
+    .reveal .sub { font-size: 0.6em; font-style: italic; color: #839496; margin: -4px 0 14px 0; line-height: 1.25; }
+    .reveal .qr-follow { display: inline-block; text-align: center; font-size: 15px; color: #839496; line-height: 1.3; }
+    .reveal .qr-follow img { display: block; margin: 0 auto 2px auto; border: 0; box-shadow: none; }
+    .reveal .qr-corner { position: absolute; right: -150px; bottom: -10px; }
+    .reveal .title-row { display: flex; align-items: center; justify-content: center; gap: 60px; margin-top: 18px; }
+    .reveal .title-row img { border: 0; box-shadow: none; margin: 0; }
+    .reveal .venue { font-size: 0.55em; color: #839496; margin-top: 6px; }
+    .reveal .slide-footer a, .reveal .footer a { color: #268bd2; }
+    #xai-types row img { max-height: 270px; width: auto; max-width: 100%; }
+    #xai-types h2 { margin-bottom: 0; }
+    #xai-types h4 { margin: 4px 0; }
+    /* title slide only: corner logos sit in the bottom corners */
+    .ocean-view .reveal > #header-left { top: auto; bottom: 1.5%; left: 1%; }
+    .ocean-view .reveal > #header-right { top: auto; bottom: 1.5%; right: 1%; }
+    /* one footer style for every citation */
+    .reveal .slides .slide-footer { font-size: 12px; line-height: 1.35; color: #839496; position: fixed; bottom: -6px; left: 0;
+      width: 100%; margin: 0; text-align: left; z-index: 30; }
+    .reveal .eq { margin: 26px 0 0 0; }
+    .reveal .eqnote { font-size: 0.5em; font-style: italic; color: #839496; margin: 8px 0 0 0; }
+    .reveal blockquote.bigquote { width: 104%; margin: 18px 0 0 -2%; padding: 22px 34px 26px 40px; box-sizing: border-box;
+      font-family: "League Gothic", Impact, sans-serif; font-size: 2.11em; line-height: 1.12; font-style: italic; text-transform: uppercase;
+      color: #586e75; background: rgba(147, 161, 161, 0.10); border-left: 10px solid #2aa198; border-radius: 0 10px 10px 0; box-shadow: none; }
+    .reveal pre.bigcode { font-size: 0.72em; width: 100%; box-shadow: none; }
+    .reveal pre.bigcode code { padding: 18px 22px; border-radius: 8px; max-height: none; }
+  </style>
 </head>
 
 
@@ -55,25 +82,23 @@
     <!-- Any section element inside of this container is displayed as a slide #93a1a1 -->
     <div class="slides">
       <section data-state="ocean-view">
-        <section data-background="figures/symposium.png" data-background-size="cover" data-background-opacity=0.15
-          class="desaturated-bg">
-          <p>
+        <section>
           <h1 style="width: 120%; margin-left: -10%; white-space: nowrap;">Message in a Bottleneck</h1>
-          <h2 style="color: #586e75; margin-top: 20px;">Architected Interpretability ArchInterp for Neuroimaging</h2>
-
-
-          <div>
-            Sergey Plis
+          <h2 style="color: #586e75; margin-top: 10px; font-size: 1.75em; white-space: nowrap;">Architected Interpretability for Brain Dynamics</h2>
+          <div>Sergey Plis</div>
+          <div class="venue">From Connectomics to Brain Dynamics &nbsp;&middot;&nbsp; IMSI &nbsp;&middot;&nbsp; November 10, 2026</div>
+          <div class="title-row">
+            <img height="105" src="figures/imsi_logo.svg" alt="IMSI">
+            <img height="120" src="figures/neuroneural_logo.png" alt="Neuroneural">
+            <div class="qr-follow">
+              <img width="115" src="figures/qr_talkinterp.svg" alt="QR code for neuroneural.net/talkinterp">
+              follow on your device<br>neuroneural.net/talkinterp
+            </div>
           </div>
-          <p>
-
-            <img style="border:0; position: relative; z-index: 10; box-shadow: 0px 0px 0px
-                                rgba(150, 150, 255, 0.8);" height="200" src="figures/neuroneural_logo.png"
-              alt="Neuroneural">
         </section>
       </section>
       <section>
-        <section data-background="figures/2012_news.png" data-background-size="contain" data-vertical-align-top>
+        <section data-background="figures/deep-learning-2012-cartoon.png" data-background-size="contain" data-vertical-align-top>
         </section>
         <section>
           <h1 class="fragment">We were confused</h1>
@@ -94,14 +119,20 @@
 
         <section>
           <h3>main question</h3>
-          <h2>Can we learn from the model something about the data that we did not explicitly teach it?</h2>
+          <blockquote class="bigquote">Can we learn from the model something about the data that we did not explicitly teach it?</blockquote>
         </section>
 
         <section>
           <h2>higher level concepts</h2>
-          <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
-					      rgba(150, 150, 255,
-					      0.8);" width="700" src="figures/concepts.png" alt="loop">
+          <div style="position: relative; display: inline-block; line-height: 0;">
+            <img style="border:0; box-shadow: none; margin: 0; height: 520px;" src="figures/concepts.png" alt="layer 1 detectors, layer 2 features, layer 3 concepts">
+            <div class="fragment fade-out" data-fragment-index="1" style="position: absolute; left: 0; width: 100%; top: 41.5%; height: 33%; background: #fdf6e3;"></div>
+            <div class="fragment fade-out" data-fragment-index="2" style="position: absolute; left: 0; width: 100%; top: 6.5%; height: 35%; background: #fdf6e3;"></div>
+            <div class="fragment fade-out" data-fragment-index="2" style="position: absolute; left: 0; width: 12%; top: 0; height: 8%; background: #fdf6e3;"></div>
+          </div>
+          <div class="slide-footer">
+            Lee H, Grosse R, Ranganath R, Ng AY. <a href="https://doi.org/10.1145/1553374.1553453" target="_blank">Convolutional deep belief networks for scalable unsupervised learning of hierarchical representations.</a> ICML, 2009.
+          </div>
         </section>
 
         <section data-transition="slide-in fade-out" data-background="figures/raw.jpg" data-background-size="contain">
@@ -119,58 +150,50 @@
           <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
 					      rgba(150, 150, 255,
 					      0.8);" width="700" src="figures/tsne_b.png" alt="loop">
-          <div class="footer">
-            Maaten, L.V.D. and Hinton, G., 2008. Visualizing data using t-SNE. Journal of machine learning research,
-            9(Nov), pp.2579-2605.
+          <div class="slide-footer">
+            van der Maaten L, Hinton G. <a href="https://www.jmlr.org/papers/v9/vandermaaten08a.html" target="_blank">Visualizing data using t-SNE.</a> Journal of Machine Learning Research, 2008.
           </div>
         </section>
 
         <section data-transition="fade-in slide-out">
+          <p class="sub" style="margin-bottom: 0;">semantic embedding</p>
           <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
 					      rgba(150,    150,   255,
 					      0.8);" width="700" src="figures/tsne_c.png" alt="loop">
-          <div class="footer">
-            Maaten, L.V.D. and Hinton, G., 2008. Visualizing data using t-SNE. Journal of machine learning research,
-            9(Nov), pp.2579-2605.
+          <div class="slide-footer">
+            van der Maaten L, Hinton G. <a href="https://www.jmlr.org/papers/v9/vandermaaten08a.html" target="_blank">Visualizing data using t-SNE.</a> Journal of Machine Learning Research, 2008.<br>
+            Huh M, Cheung B, Wang T, Isola P. <a href="https://proceedings.mlr.press/v235/huh24a.html" target="_blank">Position: The Platonic Representation Hypothesis.</a> ICML, 2024.
           </div>
         </section>
 
         <section>
           <h2>400 brains</h2>
           <h3>schizophrenia vs. healthy controls</h3>
-          <div class="footer">
-            Plis SM, Hjelm DR, Salakhutdinov R, Allen EA, Bockholt HJ, Long JD, Johnson HJ, Paulsen JS, Turner JA,
-            Calhoun VD. Deep learning for neuroimaging: a validation study. Frontiers in neuroscience. 2014 Aug
-            20;8:229.
+          <div class="slide-footer">
+            Plis SM, Hjelm DR, Salakhutdinov R, Allen EA, Bockholt HJ, Long JD, Johnson HJ, Paulsen JS, Turner JA, Calhoun VD. <a href="https://doi.org/10.3389/fnins.2014.00229" target="_blank">Deep learning for neuroimaging: a validation study.</a> Frontiers in Neuroscience, 2014.
           </div>
         </section>
 
         <section data-background="figures/deep_learning_divide_and_concur_loop.gif" data-background-size="contain"
           data-vertical-align-top>
           <h3>depth effect (dynamic)</h3>
-          <div class="footer">
-            Plis SM, Hjelm DR, Salakhutdinov R, Allen EA, Bockholt HJ, Long JD, Johnson HJ, Paulsen JS, Turner JA,
-            Calhoun VD. Deep learning for neuroimaging: a validation study. Frontiers in neuroscience. 2014 Aug
-            20;8:229.
+          <div class="slide-footer">
+            Plis SM, Hjelm DR, Salakhutdinov R, Allen EA, Bockholt HJ, Long JD, Johnson HJ, Paulsen JS, Turner JA, Calhoun VD. <a href="https://doi.org/10.3389/fnins.2014.00229" target="_blank">Deep learning for neuroimaging: a validation study.</a> Frontiers in Neuroscience, 2014.
           </div>
         </section>
 
         <section data-background="figures/static_depth.png" data-background-size="contain" data-vertical-align-top>
           <h3>depth effect (static)</h3>
-          <div class="footer">
-            Plis SM, Hjelm DR, Salakhutdinov R, Allen EA, Bockholt HJ, Long JD, Johnson HJ, Paulsen JS, Turner JA,
-            Calhoun VD. Deep learning for neuroimaging: a validation study. Frontiers in neuroscience. 2014 Aug
-            20;8:229.
+          <div class="slide-footer">
+            Plis SM, Hjelm DR, Salakhutdinov R, Allen EA, Bockholt HJ, Long JD, Johnson HJ, Paulsen JS, Turner JA, Calhoun VD. <a href="https://doi.org/10.3389/fnins.2014.00229" target="_blank">Deep learning for neuroimaging: a validation study.</a> Frontiers in Neuroscience, 2014.
           </div>
         </section>
 
         <section>
           <h2>3500 brains</h2>
           <h3>Huntington's disease</h3>
-          <div class="footer">
-            Plis SM, Hjelm DR, Salakhutdinov R, Allen EA, Bockholt HJ, Long JD, Johnson HJ, Paulsen JS, Turner JA,
-            Calhoun VD. Deep learning for neuroimaging: a validation study. Frontiers in neuroscience. 2014 Aug
-            20;8:229.
+          <div class="slide-footer">
+            Plis SM, Hjelm DR, Salakhutdinov R, Allen EA, Bockholt HJ, Long JD, Johnson HJ, Paulsen JS, Turner JA, Calhoun VD. <a href="https://doi.org/10.3389/fnins.2014.00229" target="_blank">Deep learning for neuroimaging: a validation study.</a> Frontiers in Neuroscience, 2014.
           </div>
         </section>
 
@@ -207,13 +230,15 @@
         </section>
 
         <section data-background="figures/bsnip.png" data-background-size="contain" data-vertical-align-top>
-          <h2 style="margin-left:-1300px; margin-top:600px;">B-SNIP</h2>
+          <h2 style="text-align: left; margin: 585px 0 0 12px; color: #fdf6e3; text-shadow: 0 2px 10px #000, 0 0 4px #000;">B-SNIP</h2>
         </section>
       </section>
 
       <section>
         <section>
+          <h3>12 years later</h3>
           <h1>status quo</h1>
+          <p class="sub">prediction is cheap</p>
         </section>
 
         <section data-background="figures/general_comparison_fin.svg" data-background-size="contain"
@@ -242,10 +267,51 @@
               </div>
             </col60>
           </row>
-          <div class="slide-footer" style="margin-bottom:-40px;">
-            Popov P, Mahmood U, Fu Z, Yang C, Calhoun V, Plis S. A simple but tough-to-beat baseline for fMRI
-            time-series classification. NeuroImage. 2024 Dec 1;303:120909.
+          <div class="slide-footer">
+            Popov P, Mahmood U, Fu Z, Yang C, Calhoun V, Plis S. <a href="https://doi.org/10.1016/j.neuroimage.2024.120909" target="_blank">A simple but tough-to-beat baseline for fMRI time-series classification.</a> NeuroImage, 2024.
           </div>
+        </section>
+
+        <section>
+          <div id="header-left" style="margin-left: -100px; margin-top: -50px">
+            <img src="figures/Pavel.png" alt="Pavel Popov"
+              style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 1); margin-bottom: -5%" width="160px">
+            <div style="font-size:10pt;">Pavel Popov</div>
+          </div>
+          <h2>benchmark it yourself</h2>
+          <p class="sub">13 models, one call</p>
+          <row style="align-items: center; width: 120%; margin-left: -10%;">
+            <col70>
+              <pre class="bigcode"><code class="language-python" data-trim data-noescape>
+# pip install ml4fmri
+from ml4fmri import cvbench
+
+# DATA: (subjects, time, features)
+report = cvbench(DATA, LABELS,
+                 models='all', n_folds=5)
+              </code></pre>
+            </col70>
+            <col30>
+              <div class="qr-follow">
+                <img width="210" src="figures/qr_ml4fmri.svg" alt="QR code for pypi.org/project/ml4fmri">
+                pypi.org/project/ml4fmri
+              </div>
+            </col30>
+          </row>
+          <aside class="notes">
+            ml4fmri 1.1.0. Time series: meanMLP, LSTM, meanLSTM, Transformer, meanTransformer, MILC, BolT, DICE, Glacier.
+            FNC: LR, BNT, BrainNetCNN. Both: FBNetGen. One call runs cross-validated benchmarks on your data.
+          </aside>
+        </section>
+
+        <section>
+          <h1 style="white-space: nowrap; width: 130%; margin-left: -15%; font-size: 3.1em;">prediction &ne; explanation</h1>
+          <p class="sub">the best predictor could not tell us why</p>
+          <aside class="notes">
+            In the meanMLP paper we tried saliency on the winning model. The maps gave no readable spatial story.
+            We wrote that this failed attempt shows the need to design more interpretable models.
+            On large data (UKB, HCP) BolT overtakes meanMLP, so the chase goes on, and still explains nothing.
+          </aside>
         </section>
 
         <section data-vertical-align-top>
@@ -262,28 +328,44 @@
                 src="figures/ICA_TC_example.svg" alt="Learning to predict">
             </col50>
           </row>
-          <div class="slide-footer" style="font-size:9pt; margin-bottom:-20pt;">
-            <ol>
-              <li> Vellido, A. The importance of interpretability and visualization in machine learning for applications
-                in medicine and health care. Neural computing applications 1–15 (2019).
-              <li> Singh, A., Sengupta, S. & Lakshminarayanan, V. Explainable deep learning models in medical image
-                analysis. J. Imaging 6, 52 (2020).
-              <li> Samek, W., Montavon, G., Lapuschkin, S., Anders, C. J. & Müller, K.-R. Towardf interpretable machine
-                learning: Transparent deep neural networks and beyond. arXiv preprint arXiv:2003.07631 (2020).
-            </ol>
+          <div class="slide-footer">
+            Vellido A. <a href="https://doi.org/10.1007/s00521-019-04051-w" target="_blank">The importance of interpretability and visualization in machine learning for applications in medicine and health care.</a> Neural Computing and Applications, 2020.<br>
+            Singh A, Sengupta S, Lakshminarayanan V. <a href="https://doi.org/10.3390/jimaging6060052" target="_blank">Explainable deep learning models in medical image analysis.</a> Journal of Imaging, 2020.<br>
+            Samek W, Montavon G, Lapuschkin S, Anders CJ, M&uuml;ller K-R. <a href="https://doi.org/10.1109/JPROC.2021.3060483" target="_blank">Explaining deep neural networks and beyond: a review of methods and applications.</a> Proceedings of the IEEE, 2021.
           </div>
         </section>
 
         <section data-background="figures/explainability_review.svg" data-background-size="contain"
           data-vertical-align-top>
-          <h2 style="margin-top: -70px;">interpretability: a thriving field</h2>
-          <div class="slide-footer" style="margin-bottom:-50px;">
-            Rahman, M., Calhoun, V. and Plis, S., 2026. Deep Learning Interpretability in Neuroimaging: A Comprehensive
-            Survey and Methodological Recommendations. Imaging Neuroscience.
+          <div id="header-right" style="margin-right: -135px; margin-top: 622px">
+            <img src="figures/Mahfuz.svg" alt="Mahfuzur Rahman"
+              style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 1); margin: 0" width="94px">
+            
+          </div>
+          <h2 style="margin-top: -30px;">interpretability: a thriving field</h2>
+          <div class="slide-footer">
+            Rahman MM, Calhoun VD, Plis SM. <a href="https://doi.org/10.1162/IMAG.a.1129" target="_blank">Deep learning interpretability in neuroimaging: a comprehensive survey and methodological recommendations.</a> Imaging Neuroscience, 2026.
           </div>
         </section>
 
-        <section>
+        <section data-background="figures/review_archinterp_overlay.svg, figures/explainability_review.svg" data-background-size="contain"
+          data-vertical-align-top>
+          <div id="header-right" style="margin-right: -135px; margin-top: 622px">
+            <img src="figures/Mahfuz.svg" alt="Mahfuzur Rahman"
+              style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 1); margin: 0" width="94px">
+            
+          </div>
+          <h2 style="margin-top: -30px;">mostly an afterthought</h2>
+          <div class="slide-footer">
+            Rahman MM, Calhoun VD, Plis SM. <a href="https://doi.org/10.1162/IMAG.a.1129" target="_blank">Deep learning interpretability in neuroimaging: a comprehensive survey and methodological recommendations.</a> Imaging Neuroscience, 2026.
+          </div>
+          <aside class="notes">
+            Almost every branch here is post hoc: train a black box, then probe it. The highlighted branch,
+            intrinsic methods, is the small one. ArchInterp lives there and gives it a name and a design rule.
+          </aside>
+        </section>
+
+        <section id="xai-types">
           <h2>Two types of eXplainable AI</h2>
           <row>
             <col50>
@@ -297,12 +379,21 @@
                 src="figures/PCA_spring.gif" alt="task">
             </col50>
           </row>
+          <div class="fragment" style="margin-top: 6px;">
+            <h4>&hellip;or architect the model</h4>
+            <img style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8); margin: 0;" width="62%"
+              src="figures/glass_box_layer.svg" alt="glass box layer">
+          </div>
+          <div class="slide-footer">
+            Rahman MM, Mahmood U, Lewis N, Gazula H, Fedorov A, Fu Z, Calhoun VD, Plis SM. <a href="https://doi.org/10.1038/s41598-022-15539-2" target="_blank">Interpreting models interpreting brain dynamics.</a> Scientific Reports, 2022.
+          </div>
         </section>
       </section>
 
       <section>
         <section>
           <h1>ArchInterp</h1>
+          <p class="sub" style="font-size: 0.85em;">architect your interpretability by building it in</p>
         </section>
 
         <section data-state="brightside">
@@ -346,14 +437,9 @@
                 src="figures/neural-network-architecture_graph.png" alt="Neural Net">
             </col30>
           </row>
-          <!-- <div class="slide-footer" style="font-size:9pt;"> -->
-          <!--     1. Taylor K, Das S, Pearson M, Kozubek J, Pawlowski M, Jensen CE, Skowron Z, Møller GL, Strivens M, Gardner S. Analysis of genetic host response risk factors in severe COVID-19 patients. medRxiv. 2020 Jan 1.<br> -->
-          <!--     2. <a href="https://networkx.org/documentation/stable/auto_examples/drawing/plot_chess_masters.html#sphx-glr-auto-examples-drawing-plot-chess-masters-py">Chess Masters in NetworkX</a> -->
-          <!--     3. <a href="https://igarciniacambogia.blogspot.com/2020/06/pre-socratic-graph.html">History of Philosophy</a> -->
-          <!--     4. <a href="https://www.w3.org/2003/Talks/0818-msm-ws/slide19-0.html">W3C slides</a> -->
-          <!--     5. <a hred="https://medium.com/analytics-vidhya/variable-importance-with-tree-models-random-forest-with-python-cb775d019977">DT source</a> -->
-          <!--     6. <a href="https://www.syncfusion.com/succinctly-free-ebooks/neuralnetworks/feed-forward">NN source</a> -->
-          <!-- </div> -->
+          <div class="slide-footer">
+            Sources: Taylor K et al., medRxiv 2020 &nbsp;&middot;&nbsp; <a href="https://networkx.org/documentation/stable/auto_examples/drawing/plot_chess_masters.html" target="_blank">NetworkX chess masters</a> &nbsp;&middot;&nbsp; <a href="https://igarciniacambogia.blogspot.com/2020/06/pre-socratic-graph.html" target="_blank">history of philosophy</a> &nbsp;&middot;&nbsp; <a href="https://www.w3.org/2003/Talks/0818-msm-ws/slide19-0.html" target="_blank">W3C</a> &nbsp;&middot;&nbsp; <a href="https://medium.com/analytics-vidhya/variable-importance-with-tree-models-random-forest-with-python-cb775d019977" target="_blank">decision tree</a> &nbsp;&middot;&nbsp; <a href="https://www.syncfusion.com/succinctly-free-ebooks/neuralnetworks/feed-forward" target="_blank">neural net</a>
+          </div>
           <aside class="notes">
             1. COVID-associated SNPs (circles) and co-association in patients (edges), colours = distinct patient
             sub-populations.<br>
@@ -362,22 +448,227 @@
 
         <section>
           <h3>Architected Interpretability with Graphs</h3>
-          <ul style="list-style-type: none; font-size: 19pt">
-            <li class="fragment roll-in"> To see through a black box model we need a window
-              <div align="center">
-                <img class="stretch"
-                  style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8);position: relative; margin:0 auto;"
-                  width="100%" src="figures/glass_box_into_mouse.png" alt="windowed">
-              </div>
-            <li class="fragment roll-in"> Our window is a graph, but we want the model to use it too
-              <div align="center">
-                <img class="stretch" style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8);" width="100%"
-                  src="figures/glass_box_layer.svg" alt="windowed">
-              </div>
-          </ul>
+          <row style="align-items: center; width: 136%; margin-left: -18%; margin-top: 10px;">
+            <col50 class="fragment roll-in" style="padding: 0 14px;">
+              <div style="font-size: 19pt; margin-bottom: 8px;">To see through a black box model we need a window</div>
+              <img style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8); margin: 0;" width="100%"
+                src="figures/glass_box_into_mouse.png" alt="windowed">
+            </col50>
+            <col50 class="fragment roll-in" style="padding: 0 14px;">
+              <div style="font-size: 19pt; margin-bottom: 8px;">Our window is a graph, and the model must use it too</div>
+              <img style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 0.8); margin: 0;" width="100%"
+                src="figures/glass_box_layer.svg" alt="windowed">
+            </col50>
+          </row>
+          <div class="slide-footer">
+            Lake EMR, Ge X, et al., Constable RT. <a href="https://doi.org/10.1038/s41592-020-00984-6" target="_blank">Simultaneous cortex-wide fluorescence Ca<sup>2+</sup> imaging and whole-brain fMRI.</a> Nature Methods, 2020.
+          </div>
         </section>
 
         <section>
+          <div id="header-right" style="margin-right: -150px; margin-top: -20px">
+            <img src="figures/Usman.png" alt="Usman Mahmood"
+              style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 1); margin-bottom: -5%" width="160px">
+            <div style="font-size:10pt;">Usman Mahmood</div>
+          </div>
+          <h3>building the glass box</h3>
+          <svg viewBox="0 0 1000 430" style="width:128%; margin-left:-14%; max-height:520px;" xmlns="http://www.w3.org/2000/svg" font-family="Lato, sans-serif" fill="#586e75">
+<defs><marker id="bda" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#586e75"/></marker></defs>
+<circle cx="10" cy="91" r="6.5" fill="#268bd2"/><polyline points="24.0,84.2 26.4,92.1 28.8,87.6 31.2,93.7 33.6,94.3 36.0,79.7 38.4,78.3 40.8,99.8 43.2,84.7 45.6,84.1 48.0,103.9 50.4,90.2 52.8,99.7 55.2,90.4 57.6,94.6 60.0,81.9 62.4,94.5 64.8,100.6 67.2,91.6 69.6,97.3 72.0,95.5 74.4,79.7 76.8,97.7 79.2,93.4 81.6,85.8 84.0,78.8 86.4,100.5 88.8,90.3 91.2,96.7 93.6,100.8 96.0,96.6 98.4,101.9 100.8,88.3 103.2,98.8 105.6,89.6 108.0,102.3 110.4,100.9 112.8,80.5 115.2,81.5 117.6,83.6 120.0,103.1 122.4,89.3 124.8,94.3 127.2,85.8 129.6,91.2 132.0,88.0 134.4,87.1 136.8,93.2" fill="none" stroke="#268bd2" stroke-width="1.7"/>
+<circle cx="10" cy="147" r="6.5" fill="#b58900"/><polyline points="24.0,149.2 26.4,157.5 28.8,151.7 31.2,158.2 33.6,156.3 36.0,159.8 38.4,151.5 40.8,138.2 43.2,156.4 45.6,159.1 48.0,157.5 50.4,148.8 52.8,152.6 55.2,139.5 57.6,155.6 60.0,148.9 62.4,141.4 64.8,135.6 67.2,156.2 69.6,159.7 72.0,136.3 74.4,154.8 76.8,144.7 79.2,137.9 81.6,141.6 84.0,154.0 86.4,156.7 88.8,135.1 91.2,150.0 93.6,135.2 96.0,152.7 98.4,142.6 100.8,156.9 103.2,159.5 105.6,147.1 108.0,160.0 110.4,142.1 112.8,136.0 115.2,149.6 117.6,134.8 120.0,139.1 122.4,144.6 124.8,149.9 127.2,138.1 129.6,135.1 132.0,156.6 134.4,142.2 136.8,158.9" fill="none" stroke="#b58900" stroke-width="1.7"/>
+<circle cx="10" cy="203" r="6.5" fill="#6c71c4"/><polyline points="24.0,213.3 26.4,199.8 28.8,202.0 31.2,203.5 33.6,206.7 36.0,205.5 38.4,204.5 40.8,206.1 43.2,214.5 45.6,203.2 48.0,201.2 50.4,208.7 52.8,196.2 55.2,197.8 57.6,215.4 60.0,203.5 62.4,204.3 64.8,190.3 67.2,200.8 69.6,205.1 72.0,190.5 74.4,206.0 76.8,206.4 79.2,191.6 81.6,206.3 84.0,202.1 86.4,207.7 88.8,199.2 91.2,208.4 93.6,209.2 96.0,190.6 98.4,191.6 100.8,207.6 103.2,215.0 105.6,196.5 108.0,201.9 110.4,205.4 112.8,198.3 115.2,199.5 117.6,198.1 120.0,199.6 122.4,205.5 124.8,197.8 127.2,199.8 129.6,210.1 132.0,190.7 134.4,204.8 136.8,209.1" fill="none" stroke="#6c71c4" stroke-width="1.7"/>
+<circle cx="10" cy="259" r="6.5" fill="#d33682"/><polyline points="24.0,254.1 26.4,251.8 28.8,266.9 31.2,252.2 33.6,250.9 36.0,257.3 38.4,264.1 40.8,248.6 43.2,254.4 45.6,254.7 48.0,267.7 50.4,257.4 52.8,268.2 55.2,250.4 57.6,254.8 60.0,262.9 62.4,269.0 64.8,257.7 67.2,251.9 69.6,249.1 72.0,259.8 74.4,251.0 76.8,267.0 79.2,267.8 81.6,250.8 84.0,253.2 86.4,267.0 88.8,262.7 91.2,267.0 93.6,255.0 96.0,249.4 98.4,253.6 100.8,266.6 103.2,253.1 105.6,255.0 108.0,256.8 110.4,256.9 112.8,256.6 115.2,269.9 117.6,250.1 120.0,246.1 122.4,270.5 124.8,268.9 127.2,271.7 129.6,257.3 132.0,270.7 134.4,270.1 136.8,251.8" fill="none" stroke="#d33682" stroke-width="1.7"/>
+<text x="78" y="335" text-anchor="middle" font-size="17" fill="#586e75">regions over time</text>
+<g class="fragment" data-fragment-index="1">
+<line x1="148" y1="91" x2="172" y2="91" stroke="#586e75" stroke-width="2.2" marker-end="url(#bda)"/>
+<rect x="178" y="72" width="96" height="38" rx="5" fill="#073642"/><text x="226" y="97" text-anchor="middle" font-size="16" fill="#fdf6e3" font-variant="small-caps" letter-spacing="1">encoder</text>
+<line x1="279" y1="91" x2="300" y2="91" stroke="#586e75" stroke-width="2.2" marker-end="url(#bda)"/>
+<rect x="306" y="82" width="11" height="18" fill="#268bd2" opacity="0.45"/>
+<rect x="318" y="82" width="11" height="18" fill="#268bd2" opacity="0.99"/>
+<rect x="330" y="82" width="11" height="18" fill="#268bd2" opacity="0.81"/>
+<rect x="342" y="82" width="11" height="18" fill="#268bd2" opacity="0.63"/>
+<line x1="148" y1="147" x2="172" y2="147" stroke="#586e75" stroke-width="2.2" marker-end="url(#bda)"/>
+<rect x="178" y="128" width="96" height="38" rx="5" fill="#073642"/><text x="226" y="153" text-anchor="middle" font-size="16" fill="#fdf6e3" font-variant="small-caps" letter-spacing="1">encoder</text>
+<line x1="279" y1="147" x2="300" y2="147" stroke="#586e75" stroke-width="2.2" marker-end="url(#bda)"/>
+<rect x="306" y="138" width="11" height="18" fill="#b58900" opacity="0.99"/>
+<rect x="318" y="138" width="11" height="18" fill="#b58900" opacity="0.81"/>
+<rect x="330" y="138" width="11" height="18" fill="#b58900" opacity="0.63"/>
+<rect x="342" y="138" width="11" height="18" fill="#b58900" opacity="0.45"/>
+<line x1="148" y1="203" x2="172" y2="203" stroke="#586e75" stroke-width="2.2" marker-end="url(#bda)"/>
+<rect x="178" y="184" width="96" height="38" rx="5" fill="#073642"/><text x="226" y="209" text-anchor="middle" font-size="16" fill="#fdf6e3" font-variant="small-caps" letter-spacing="1">encoder</text>
+<line x1="279" y1="203" x2="300" y2="203" stroke="#586e75" stroke-width="2.2" marker-end="url(#bda)"/>
+<rect x="306" y="194" width="11" height="18" fill="#6c71c4" opacity="0.81"/>
+<rect x="318" y="194" width="11" height="18" fill="#6c71c4" opacity="0.63"/>
+<rect x="330" y="194" width="11" height="18" fill="#6c71c4" opacity="0.45"/>
+<rect x="342" y="194" width="11" height="18" fill="#6c71c4" opacity="0.99"/>
+<line x1="148" y1="259" x2="172" y2="259" stroke="#586e75" stroke-width="2.2" marker-end="url(#bda)"/>
+<rect x="178" y="240" width="96" height="38" rx="5" fill="#073642"/><text x="226" y="265" text-anchor="middle" font-size="16" fill="#fdf6e3" font-variant="small-caps" letter-spacing="1">encoder</text>
+<line x1="279" y1="259" x2="300" y2="259" stroke="#586e75" stroke-width="2.2" marker-end="url(#bda)"/>
+<rect x="306" y="250" width="11" height="18" fill="#d33682" opacity="0.63"/>
+<rect x="318" y="250" width="11" height="18" fill="#d33682" opacity="0.45"/>
+<rect x="330" y="250" width="11" height="18" fill="#d33682" opacity="0.99"/>
+<rect x="342" y="250" width="11" height="18" fill="#d33682" opacity="0.81"/>
+<text x="250" y="335" text-anchor="middle" font-size="17" fill="#586e75">shared encoder</text>
+<path d="M178,380 v10 H274 v-10" fill="none" stroke="#586e75" stroke-width="2.5"/><text x="226.0" y="416" text-anchor="middle" font-size="20" font-variant="small-caps" letter-spacing="1" fill="#586e75">black box</text>
+</g>
+<g class="fragment" data-fragment-index="2">
+<line x1="358" y1="91" x2="384" y2="175" stroke="#586e75" stroke-width="1.6"/>
+<line x1="358" y1="147" x2="384" y2="175" stroke="#586e75" stroke-width="1.6"/>
+<line x1="358" y1="203" x2="384" y2="175" stroke="#586e75" stroke-width="1.6"/>
+<line x1="358" y1="259" x2="384" y2="175" stroke="#586e75" stroke-width="1.6"/>
+<line x1="384" y1="175" x2="408" y2="175" stroke="#586e75" stroke-width="3" marker-end="url(#bda)"/>
+<rect x="416" y="109" width="26" height="26" fill="rgb(185,55,53)"/>
+<rect x="442" y="109" width="26" height="26" fill="rgb(205,112,105)"/>
+<rect x="468" y="109" width="26" height="26" fill="rgb(213,135,126)"/>
+<rect x="494" y="109" width="26" height="26" fill="rgb(205,111,104)"/>
+<rect x="416" y="135" width="26" height="26" fill="rgb(226,170,158)"/>
+<rect x="442" y="135" width="26" height="26" fill="rgb(185,55,53)"/>
+<rect x="468" y="135" width="26" height="26" fill="rgb(192,74,70)"/>
+<rect x="494" y="135" width="26" height="26" fill="rgb(191,72,69)"/>
+<rect x="416" y="161" width="26" height="26" fill="rgb(201,99,93)"/>
+<rect x="442" y="161" width="26" height="26" fill="rgb(228,178,165)"/>
+<rect x="468" y="161" width="26" height="26" fill="rgb(185,55,53)"/>
+<rect x="494" y="161" width="26" height="26" fill="rgb(208,120,113)"/>
+<rect x="416" y="187" width="26" height="26" fill="rgb(219,151,140)"/>
+<rect x="442" y="187" width="26" height="26" fill="rgb(223,163,152)"/>
+<rect x="468" y="187" width="26" height="26" fill="rgb(184,52,50)"/>
+<rect x="494" y="187" width="26" height="26" fill="rgb(185,55,53)"/>
+<rect x="416" y="109" width="104" height="104" fill="none" stroke="#586e75" stroke-width="1.5"/>
+<rect x="428" y="121" width="26" height="26" fill="rgb(185,55,53)"/>
+<rect x="454" y="121" width="26" height="26" fill="rgb(212,131,122)"/>
+<rect x="480" y="121" width="26" height="26" fill="rgb(206,114,107)"/>
+<rect x="506" y="121" width="26" height="26" fill="rgb(186,56,54)"/>
+<rect x="428" y="147" width="26" height="26" fill="rgb(211,129,120)"/>
+<rect x="454" y="147" width="26" height="26" fill="rgb(185,55,53)"/>
+<rect x="480" y="147" width="26" height="26" fill="rgb(209,122,114)"/>
+<rect x="506" y="147" width="26" height="26" fill="rgb(204,110,103)"/>
+<rect x="428" y="173" width="26" height="26" fill="rgb(227,174,161)"/>
+<rect x="454" y="173" width="26" height="26" fill="rgb(209,122,114)"/>
+<rect x="480" y="173" width="26" height="26" fill="rgb(185,55,53)"/>
+<rect x="506" y="173" width="26" height="26" fill="rgb(202,103,97)"/>
+<rect x="428" y="199" width="26" height="26" fill="rgb(193,77,73)"/>
+<rect x="454" y="199" width="26" height="26" fill="rgb(232,188,174)"/>
+<rect x="480" y="199" width="26" height="26" fill="rgb(220,155,144)"/>
+<rect x="506" y="199" width="26" height="26" fill="rgb(185,55,53)"/>
+<rect x="428" y="121" width="104" height="104" fill="none" stroke="#586e75" stroke-width="1.5"/>
+<rect x="440" y="133" width="26" height="26" fill="rgb(185,55,53)"/>
+<rect x="466" y="133" width="26" height="26" fill="rgb(211,128,119)"/>
+<rect x="492" y="133" width="26" height="26" fill="rgb(201,99,93)"/>
+<rect x="518" y="133" width="26" height="26" fill="rgb(200,97,91)"/>
+<rect x="440" y="159" width="26" height="26" fill="rgb(229,180,167)"/>
+<rect x="466" y="159" width="26" height="26" fill="rgb(185,55,53)"/>
+<rect x="492" y="159" width="26" height="26" fill="rgb(237,201,186)"/>
+<rect x="518" y="159" width="26" height="26" fill="rgb(216,144,134)"/>
+<rect x="440" y="185" width="26" height="26" fill="rgb(222,160,148)"/>
+<rect x="466" y="185" width="26" height="26" fill="rgb(192,74,71)"/>
+<rect x="492" y="185" width="26" height="26" fill="rgb(185,55,53)"/>
+<rect x="518" y="185" width="26" height="26" fill="rgb(199,93,88)"/>
+<rect x="440" y="211" width="26" height="26" fill="rgb(204,107,101)"/>
+<rect x="466" y="211" width="26" height="26" fill="rgb(206,114,107)"/>
+<rect x="492" y="211" width="26" height="26" fill="rgb(200,98,92)"/>
+<rect x="518" y="211" width="26" height="26" fill="rgb(185,55,53)"/>
+<rect x="440" y="133" width="104" height="104" fill="none" stroke="#586e75" stroke-width="1.5"/>
+<circle cx="554" cy="146.0" r="5.5" fill="#268bd2"/><circle cx="453.0" cy="247" r="5.5" fill="#268bd2"/>
+<circle cx="554" cy="172.0" r="5.5" fill="#b58900"/><circle cx="479.0" cy="247" r="5.5" fill="#b58900"/>
+<circle cx="554" cy="198.0" r="5.5" fill="#6c71c4"/><circle cx="505.0" cy="247" r="5.5" fill="#6c71c4"/>
+<circle cx="554" cy="224.0" r="5.5" fill="#d33682"/><circle cx="531.0" cy="247" r="5.5" fill="#d33682"/>
+<text x="492" y="335" text-anchor="middle" font-size="17" fill="#586e75">a graph per moment</text>
+</g>
+<g class="fragment" data-fragment-index="3">
+<line x1="566" y1="175" x2="662" y2="175" stroke="#586e75" stroke-width="3" marker-end="url(#bda)"/>
+<rect x="576" y="150.5" width="5" height="10.5" fill="#2aa198"/>
+<rect x="583" y="149.2" width="5" height="11.8" fill="#2aa198"/>
+<rect x="590" y="148.7" width="5" height="12.3" fill="#2aa198"/>
+<rect x="597" y="128.7" width="5" height="32.3" fill="#2aa198"/>
+<rect x="604" y="134.8" width="5" height="26.2" fill="#2aa198"/>
+<rect x="611" y="147.3" width="5" height="13.7" fill="#2aa198"/>
+<rect x="618" y="156.7" width="5" height="4.3" fill="#2aa198"/>
+<rect x="625" y="152.1" width="5" height="8.9" fill="#2aa198"/>
+<rect x="632" y="147.1" width="5" height="13.9" fill="#2aa198"/>
+<rect x="639" y="137.5" width="5" height="23.5" fill="#2aa198"/>
+<rect x="646" y="147.5" width="5" height="13.5" fill="#2aa198"/>
+<text x="617" y="202" text-anchor="middle" font-size="14" fill="#2aa198">which moments</text>
+<rect x="672" y="119" width="28" height="28" fill="rgb(185,55,53)"/>
+<rect x="700" y="119" width="28" height="28" fill="rgb(202,101,95)"/>
+<rect x="728" y="119" width="28" height="28" fill="rgb(236,199,184)"/>
+<rect x="756" y="119" width="28" height="28" fill="rgb(222,159,148)"/>
+<rect x="672" y="147" width="28" height="28" fill="rgb(225,168,156)"/>
+<rect x="700" y="147" width="28" height="28" fill="rgb(185,55,53)"/>
+<rect x="728" y="147" width="28" height="28" fill="rgb(196,86,81)"/>
+<rect x="756" y="147" width="28" height="28" fill="rgb(199,96,90)"/>
+<rect x="672" y="175" width="28" height="28" fill="rgb(187,61,59)"/>
+<rect x="700" y="175" width="28" height="28" fill="rgb(233,189,175)"/>
+<rect x="728" y="175" width="28" height="28" fill="rgb(185,55,53)"/>
+<rect x="756" y="175" width="28" height="28" fill="rgb(214,136,127)"/>
+<rect x="672" y="203" width="28" height="28" fill="rgb(236,198,184)"/>
+<rect x="700" y="203" width="28" height="28" fill="rgb(225,168,156)"/>
+<rect x="728" y="203" width="28" height="28" fill="rgb(209,123,115)"/>
+<rect x="756" y="203" width="28" height="28" fill="rgb(185,55,53)"/>
+<rect x="672" y="119" width="112" height="112" fill="none" stroke="#586e75" stroke-width="1.5"/>
+<circle cx="794" cy="133.0" r="5.5" fill="#268bd2"/><circle cx="686.0" cy="241" r="5.5" fill="#268bd2"/>
+<circle cx="794" cy="161.0" r="5.5" fill="#b58900"/><circle cx="714.0" cy="241" r="5.5" fill="#b58900"/>
+<circle cx="794" cy="189.0" r="5.5" fill="#6c71c4"/><circle cx="742.0" cy="241" r="5.5" fill="#6c71c4"/>
+<circle cx="794" cy="217.0" r="5.5" fill="#d33682"/><circle cx="770.0" cy="241" r="5.5" fill="#d33682"/>
+<text x="728" y="335" text-anchor="middle" font-size="17" fill="#586e75">one graph</text>
+<path d="M416,380 v10 H800 v-10" fill="none" stroke="#2aa198" stroke-width="2.5"/><text x="608.0" y="416" text-anchor="middle" font-size="20" font-variant="small-caps" letter-spacing="1" fill="#2aa198">glass box</text>
+</g>
+<g class="fragment" data-fragment-index="4">
+<line x1="806" y1="175" x2="836" y2="175" stroke="#586e75" stroke-width="3" marker-end="url(#bda)"/>
+<rect x="842" y="130" width="120" height="90" rx="6" fill="#073642"/><text x="902" y="182" text-anchor="middle" font-size="21" fill="#fdf6e3" font-variant="small-caps" letter-spacing="1">classifier</text>
+<text x="902" y="335" text-anchor="middle" font-size="17" fill="#586e75">patient or control</text>
+<path d="M842,380 v10 H962 v-10" fill="none" stroke="#586e75" stroke-width="2.5"/><text x="902.0" y="416" text-anchor="middle" font-size="20" font-variant="small-caps" letter-spacing="1" fill="#586e75">black box</text>
+</g>
+</svg>
+          <div class="slide-footer">
+            Mahmood U, Fu Z, Ghosh S, Calhoun V, Plis S. <a href="https://doi.org/10.1016/j.neuroimage.2022.119737" target="_blank">Through the looking glass: deep interpretable dynamic directed connectivity in resting fMRI.</a> NeuroImage, 2022.<br>
+            Mahmood U, Fu Z, Calhoun V, Plis S. <a href="https://doi.org/10.1109/ICASSP49357.2023.10097126" target="_blank">Glacier: glass-box transformer for interpretable dynamic neuroimaging.</a> IEEE ICASSP, 2023.
+          </div>
+          <aside class="notes">
+            Build it step by step. Start: ICA time courses, one per region.
+            1. The same encoder reads each region's time course on its own, with shared weights. biLSTM in DICE, transformer in Glacier. A black box, but region i goes in and embedding i comes out, so we always know which node is which in the attention matrix. Follow the colors.
+            2. At every time point, self-attention across regions gives a directed weight matrix. No sliding window, so no window-size choice.
+            3. Temporal attention scores each moment and sums the graphs into one.
+            4. Only that graph reaches the classifier. The features do not. So whatever the model uses to predict must be in the graph.
+          </aside>
+        </section>
+
+        <section>
+          <div id="header-right" style="margin-right: -150px; margin-top: -20px">
+            <img src="figures/Usman.png" alt="Usman Mahmood"
+              style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 1); margin-bottom: -5%" width="160px">
+            <div style="font-size:10pt;">Usman Mahmood</div>
+          </div>
+          <h3>how the graph is computed</h3>
+          <div style="font-size: 0.78em;">
+            <div class="fragment">
+              <p class="eq">$\mathbf{h}^i_t = \mathrm{enc}\big(x^i_{1:T}\big)_t \qquad \mathbf{H}_t = \big[\mathbf{h}^1_t;\,\dots;\,\mathbf{h}^n_t\big]$</p>
+              <p class="eqnote">each region encoded on its own, so row $i$ is region $i$: biLSTM (DICE) or transformer (Glacier)</p>
+            </div>
+            <div class="fragment">
+              <p class="eq">$\mathbf{W}_t = \mathrm{softmax}\big(\mathbf{H}_t\,\mathbf{W}^{(q)}\,\mathbf{W}^{(k)\top}\mathbf{H}_t^{\top}\big)$</p>
+              <p class="eqnote">all regions at once: the attention alignment matrix is the directed graph at time $t$</p>
+            </div>
+            <div class="fragment">
+              <p class="eq">$\alpha_t = \mathrm{MLP}\big(\mathrm{flat}(\mathbf{W}_t \odot \overline{\mathbf{W}})\big) \qquad \mathbf{W}^f = \sum_{t=1}^{T} \alpha_t\,\mathbf{W}_t$</p>
+              <p class="eqnote">temporal attention: which moments matter</p>
+            </div>
+            <div class="fragment">
+              <p class="eq">$\hat{y} = \mathrm{MLP}\big(\mathbf{W}^f\big)$</p>
+              <p class="eqnote">only the graph reaches the classifier</p>
+            </div>
+          </div>
+          <div class="slide-footer">
+            Mahmood U, Fu Z, Ghosh S, Calhoun V, Plis S. <a href="https://doi.org/10.1016/j.neuroimage.2022.119737" target="_blank">Through the looking glass: deep interpretable dynamic directed connectivity in resting fMRI.</a> NeuroImage, 2022.<br>
+            Mahmood U, Fu Z, Calhoun V, Plis S. <a href="https://doi.org/10.1109/ICASSP49357.2023.10097126" target="_blank">Glacier: glass-box transformer for interpretable dynamic neuroimaging.</a> IEEE ICASSP, 2023.
+          </div>
+          <aside class="notes">
+            H_t stacks the region embeddings as rows. Row i of W_t holds how much region i draws on every other region at time t. This is eq. 2 of the DICE paper written with all regions in one matrix; the softmax runs over each row. Query and key maps differ, so W_t is not symmetric: that is where direction comes from.
+            W-bar is the mean of W_t over time, the global view. Each moment is scored by how it relates to that global view.
+            DICE and Glacier differ only in the encoder.
+          </aside>
+        </section>
+
+        <section data-visibility="hidden">
           <row>
             <col50>
               <h4>windowless directed connectivity</h4>
@@ -420,13 +711,100 @@
             <col50>
             </col50>
           </row>
-          <div class="slide-footer" style="margin-bottom:-40px; font-size:8pt;">
-            Mahmood U, Fu Z, Calhoun V, Plis S. Glacier: glass-box transformer for interpretable dynamic neuroimaging.
-            InICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) 2023
-            Jun 4 (pp. 1-5). IEEE.<br>
-            Mahmood U, Fu Z, Ghosh S, Calhoun V, Plis S. Through the looking glass: Deep interpretable dynamic directed
-            connectivity in resting fMRI. NeuroImage. 2022 Dec 1;264:119737.
+          <div class="slide-footer">
+            Mahmood U, Fu Z, Calhoun V, Plis S. <a href="https://doi.org/10.1109/ICASSP49357.2023.10097126" target="_blank">Glacier: glass-box transformer for interpretable dynamic neuroimaging.</a> IEEE ICASSP, 2023.<br>
+            Mahmood U, Fu Z, Ghosh S, Calhoun V, Plis S. <a href="https://doi.org/10.1016/j.neuroimage.2022.119737" target="_blank">Through the looking glass: deep interpretable dynamic directed connectivity in resting fMRI.</a> NeuroImage, 2022.
           </div>
+          <aside class="notes">
+            Top row: same kind of model, three training labels, plus plain correlation for contrast.
+            Dementia (OASIS): the graph leans on sensorimotor. Mean sensorimotor weight 0.64 against 0.58 in correlation; default mode 0.478 against 0.487.
+            Sex, same subjects: the graph shifts to default mode. Sensorimotor drops to 0.555, default mode rises to 0.527.
+            Age regression: a much fainter, more diagonal graph.
+            Far right: Pearson correlation. It is one matrix whatever the question. The learned graph changes with the question.
+            Bottom: top 10% of directed edges on FBIRN, 53 components on the ring. Blue: the higher-numbered node is the source. Red: the lower-numbered node is the source.
+            Visual components send edges across the brain and get few back. Within-domain links are dense, as known.
+          </aside>
+        </section>
+
+        <section>
+          <div id="header-right" style="margin-right: -150px; margin-top: -20px">
+            <img src="figures/Usman.png" alt="Usman Mahmood"
+              style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 1); margin-bottom: -5%" width="160px">
+            <div style="font-size:10pt;">Usman Mahmood</div>
+          </div>
+          <h3>5% of the scan is enough</h3>
+          <p class="sub">graphs at the moments the model attends to carry the prediction</p>
+          <svg viewBox="0 0 900 420" style="width:100%; max-height:470px;" xmlns="http://www.w3.org/2000/svg" font-family="Lato, sans-serif" fill="#586e75">
+<line x1="90" x2="870" y1="350.0" y2="350.0" stroke="#93a1a1" stroke-width="1.4" />
+<text x="78" y="356.0" text-anchor="end" font-size="17">0</text>
+<line x1="90" x2="870" y1="275.0" y2="275.0" stroke="#93a1a1" stroke-width="0.6" />
+<text x="78" y="281.0" text-anchor="end" font-size="17">0.25</text>
+<line x1="90" x2="870" y1="200.0" y2="200.0" stroke="#93a1a1" stroke-width="0.6" stroke-dasharray='7 6'/>
+<text x="78" y="206.0" text-anchor="end" font-size="17">0.5</text>
+<line x1="90" x2="870" y1="125.0" y2="125.0" stroke="#93a1a1" stroke-width="0.6" />
+<text x="78" y="131.0" text-anchor="end" font-size="17">0.75</text>
+<line x1="90" x2="870" y1="50.0" y2="50.0" stroke="#93a1a1" stroke-width="0.6" />
+<text x="78" y="56.0" text-anchor="end" font-size="17">1</text>
+<text x="28" y="200.0" font-size="18" text-anchor="middle" transform="rotate(-90 28 200.0)">ROC AUC</text>
+<rect x="119.0" y="92.0" width="62" height="258.0" fill="#586e75" rx="3"/>
+<text x="150.0" y="85.0" text-anchor="middle" font-size="16" font-weight="700" fill="#586e75">0.86</text>
+<rect x="189.0" y="95.0" width="62" height="255.0" fill="#2aa198" rx="3"/>
+<text x="220.0" y="88.0" text-anchor="middle" font-size="16" font-weight="700" fill="#2aa198">0.85</text>
+<rect x="259.0" y="180.2" width="62" height="169.8" fill="#cb4b16" rx="3"/>
+<text x="290.0" y="173.2" text-anchor="middle" font-size="16" font-weight="700" fill="#cb4b16">0.566</text>
+<text x="220.0" y="378" text-anchor="middle" font-size="20">FBIRN</text>
+<rect x="379.0" y="124.4" width="62" height="225.6" fill="#586e75" rx="3"/>
+<text x="410.0" y="117.4" text-anchor="middle" font-size="16" font-weight="700" fill="#586e75">0.752</text>
+<rect x="449.0" y="127.1" width="62" height="222.9" fill="#2aa198" rx="3"/>
+<text x="480.0" y="120.1" text-anchor="middle" font-size="16" font-weight="700" fill="#2aa198">0.743</text>
+<rect x="519.0" y="185.6" width="62" height="164.4" fill="#cb4b16" rx="3"/>
+<text x="550.0" y="178.6" text-anchor="middle" font-size="16" font-weight="700" fill="#cb4b16">0.548</text>
+<text x="480.0" y="378" text-anchor="middle" font-size="20">OASIS</text>
+<rect x="639.0" y="133.4" width="62" height="216.6" fill="#586e75" rx="3"/>
+<text x="670.0" y="126.4" text-anchor="middle" font-size="16" font-weight="700" fill="#586e75">0.722</text>
+<rect x="709.0" y="138.2" width="62" height="211.8" fill="#2aa198" rx="3"/>
+<text x="740.0" y="131.2" text-anchor="middle" font-size="16" font-weight="700" fill="#2aa198">0.706</text>
+<rect x="779.0" y="190.4" width="62" height="159.6" fill="#cb4b16" rx="3"/>
+<text x="810.0" y="183.4" text-anchor="middle" font-size="16" font-weight="700" fill="#cb4b16">0.532</text>
+<text x="740.0" y="378" text-anchor="middle" font-size="20">ABIDE</text>
+<rect x="160" y="8" width="18" height="18" fill="#586e75" rx="3"/><text x="186" y="23" font-size="18">full model</text>
+<rect x="308.0" y="8" width="18" height="18" fill="#2aa198" rx="3"/><text x="334.0" y="23" font-size="18">top 5% of time points</text>
+<rect x="568.2" y="8" width="18" height="18" fill="#cb4b16" rx="3"/><text x="594.2" y="23" font-size="18">bottom 5%</text>
+<line x1="706.0" x2="736.0" y1="17" y2="17" stroke="#93a1a1" stroke-width="1.6" stroke-dasharray="7 6"/><text x="744.0" y="23" font-size="18">chance</text>
+</svg>
+          <div class="slide-footer">
+            Mahmood U, Fu Z, Ghosh S, Calhoun V, Plis S. <a href="https://doi.org/10.1016/j.neuroimage.2022.119737" target="_blank">Through the looking glass: deep interpretable dynamic directed connectivity in resting fMRI.</a> NeuroImage, 2022.
+          </div>
+          <aside class="notes">
+            DICE, Table 10. Temporal attention ranks time points. Logistic regression on the graphs from the top 5%
+            nearly matches the full model: 0.85 vs 0.86 FBIRN, 0.743 vs 0.752 OASIS, 0.706 vs 0.722 ABIDE.
+            The bottom 5% is near chance. Attention weights are stable across random seeds.
+            Evidence so far, not a proof. This is an open problem.
+          </aside>
+        </section>
+
+        <section>
+          <div id="header-right" style="margin-right: -150px; margin-top: -20px">
+            <img src="figures/Usman.png" alt="Usman Mahmood"
+              style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 1); margin-bottom: -5%" width="160px">
+            <div style="font-size:10pt;">Usman Mahmood</div>
+          </div>
+          <h2>reading the learned graph</h2>
+          <p class="sub">DICE trained to tell schizophrenia from controls, FBIRN</p>
+          <ul style="list-style-type: square; list-style-position: inside; font-size:44px; font-variant: small-caps; display: inline-block; text-align: left; white-space: nowrap;">
+            <li class="fragment">visual &rarr; everything else</li>
+            <li class="fragment">cognitive control &rarr; sensorimotor</li>
+            <li class="fragment">schizophrenia: weaker senses, busier default mode</li>
+            <li class="fragment">new label, new graph <span style="font-variant: normal; font-size: 0.5em; color: #93a1a1;">&nbsp; OASIS: dementia, sex</span></li>
+          </ul>
+          <div class="slide-footer">
+            Mahmood U, Fu Z, Ghosh S, Calhoun V, Plis S. <a href="https://doi.org/10.1016/j.neuroimage.2022.119737" target="_blank">Through the looking glass: deep interpretable dynamic directed connectivity in resting fMRI.</a> NeuroImage, 2022.
+          </div>
+          <aside class="notes">
+            Direction: visual networks send to the rest, little comes back. Cognitive control drives sensorimotor. Correlation (FNC) cannot show direction.
+            Schizophrenia: weaker visual and sensorimotor connectivity, hyper-connected default mode, less time in strongly connected states.
+            Task dependence: same model, different label, different graph. Sensorimotor and cerebellum for dementia, default mode for sex.
+          </aside>
         </section>
 
         <section data-vertical-align-top>
@@ -440,14 +818,108 @@
           <img class="stretch" style="border:0; box-shadow: 0px 0px 0px
                                               rgba(150, 150, 255,
                                               0.8);" width="80%" src="figures/model_diagram_DECIFRA.svg" alt="loop">
+          <div class="slide-footer">
+            Popov P, Morasso C, Dolci G, Boscolo Galazzo I, Pearlson G, Danks D, Calhoun V, Menegaz G, Plis S. <a href="https://doi.org/10.1109/TMI.2026.3735891" target="_blank">Message in a bottleneck: interpretable deep learning for dynamic effective brain connectivity.</a> IEEE Transactions on Medical Imaging, 2026.
+          </div>
         </section>
 
-        <section data-vertical-align-top data-background-size="contain" data-background="figures/decifra_result.png">
+        <section>
+          <div id="header-right" style="margin-right: -150px; margin-top: -20px">
+            <img src="figures/Pavel.png" alt="Pavel Popov"
+              style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 1); margin-bottom: -5%" width="160px">
+            <div style="font-size:10pt;">Pavel Popov</div>
+          </div>
+          <h3>take the graph away</h3>
+          <p class="sub">without it, the model forecasts like a black box</p>
+          <svg viewBox="0 0 900 400" style="width:100%; max-height:450px;" xmlns="http://www.w3.org/2000/svg" font-family="Lato, sans-serif" fill="#586e75">
+<line x1="359.0" x2="359.0" y1="22" y2="324" stroke="#93a1a1" stroke-width="0.6"/><text x="359.0" y="346" text-anchor="middle" font-size="16">0.414</text>
+<line x1="475.2" x2="475.2" y1="22" y2="324" stroke="#93a1a1" stroke-width="0.6"/><text x="475.2" y="346" text-anchor="middle" font-size="16">0.416</text>
+<line x1="591.3" x2="591.3" y1="22" y2="324" stroke="#93a1a1" stroke-width="0.6"/><text x="591.3" y="346" text-anchor="middle" font-size="16">0.418</text>
+<line x1="707.4" x2="707.4" y1="22" y2="324" stroke="#93a1a1" stroke-width="0.6"/><text x="707.4" y="346" text-anchor="middle" font-size="16">0.420</text>
+<line x1="823.5" x2="823.5" y1="22" y2="324" stroke="#93a1a1" stroke-width="0.6"/><text x="823.5" y="346" text-anchor="middle" font-size="16">0.422</text>
+<line x1="422.9" x2="422.9" y1="22" y2="324" stroke="#2aa198" stroke-width="1.6" stroke-dasharray="6 5"/>
+<text x="308" y="57.0" text-anchor="end" font-size="20" fill="#2aa198" font-weight='700'>DECIFRA</text>
+<line x1="376.5" x2="469.4" y1="51.0" y2="51.0" stroke="#2aa198" stroke-width="3" stroke-linecap="round"/>
+<circle cx="422.9" cy="51.0" r="8" fill="#2aa198"/>
+<text x="308" y="99.0" text-anchor="end" font-size="20" fill="#2aa198" >no sparsity</text>
+<line x1="359.0" x2="556.5" y1="93.0" y2="93.0" stroke="#2aa198" stroke-width="3" stroke-linecap="round"/>
+<circle cx="457.7" cy="93.0" r="8" fill="#2aa198"/>
+<text x="308" y="141.0" text-anchor="end" font-size="20" fill="#cb4b16" >graph &#8594; identity + noise</text>
+<line x1="521.6" x2="661.0" y1="135.0" y2="135.0" stroke="#cb4b16" stroke-width="3" stroke-linecap="round"/>
+<circle cx="591.3" cy="135.0" r="8" fill="#cb4b16"/>
+<text x="308" y="183.0" text-anchor="end" font-size="20" fill="#cb4b16" >graph &#8594; identity</text>
+<line x1="585.5" x2="736.5" y1="177.0" y2="177.0" stroke="#cb4b16" stroke-width="3" stroke-linecap="round"/>
+<circle cx="661.0" cy="177.0" r="8" fill="#cb4b16"/>
+<text x="308" y="225.0" text-anchor="end" font-size="20" fill="#586e75" >LSTM</text>
+<line x1="637.7" x2="672.6" y1="219.0" y2="219.0" stroke="#586e75" stroke-width="3" stroke-linecap="round"/>
+<circle cx="655.2" cy="219.0" r="8" fill="#586e75"/>
+<text x="308" y="267.0" text-anchor="end" font-size="20" fill="#586e75" >GRU</text>
+<line x1="661.0" x2="695.8" y1="261.0" y2="261.0" stroke="#586e75" stroke-width="3" stroke-linecap="round"/>
+<circle cx="678.4" cy="261.0" r="8" fill="#586e75"/>
+<text x="308" y="309.0" text-anchor="end" font-size="20" fill="#586e75" >VAR, lag 20</text>
+<line x1="823.5" x2="835.2" y1="303.0" y2="303.0" stroke="#586e75" stroke-width="3" stroke-linecap="round"/>
+<circle cx="829.4" cy="303.0" r="8" fill="#586e75"/>
+<text x="600.0" y="376" text-anchor="middle" font-size="18">validation forecast error (MSE) &#160;&#183;&#160; lower is better</text>
+</svg>
+          <div class="slide-footer">
+            Popov P, Morasso C, Dolci G, Boscolo Galazzo I, Pearlson G, Danks D, Calhoun V, Menegaz G, Plis S. <a href="https://doi.org/10.1109/TMI.2026.3735891" target="_blank">Message in a bottleneck: interpretable deep learning for dynamic effective brain connectivity.</a> IEEE Transactions on Medical Imaging, 2026.
+          </div>
+          <aside class="notes">
+            TMI paper, Table III. UK Biobank pretraining set, 10 runs each. Replace the transition matrix with identity:
+            regions can no longer talk through the graph. Error rises to the LSTM and GRU level.
+            The gap is small because each region's own past explains most of the next step. It is reliable across runs.
+          </aside>
+        </section>
+
+        <section data-vertical-align-top data-background-size="auto 86%" data-background-position="center top" data-background="figures/decifra_result.png">
           <div id="header-right" style="margin-right: -100px; margin-top: -20px">
             <img src="figures/Pavel.png" alt="Pavel Popov"
               style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 1); margin-bottom: -5%" width="160px">
             <div style="font-size:10pt;">Pavel Popov</div>
           </div>
+          <div class="slide-footer">
+            Popov P, Morasso C, Dolci G, Boscolo Galazzo I, Pearlson G, Danks D, Calhoun V, Menegaz G, Plis S. <a href="https://doi.org/10.1109/TMI.2026.3735891" target="_blank">Message in a bottleneck: interpretable deep learning for dynamic effective brain connectivity.</a> IEEE Transactions on Medical Imaging, 2026.
+          </div>
+        </section>
+
+        <section>
+          <div id="header-right" style="margin-right: -150px; margin-top: -20px">
+            <img src="figures/Pavel.png" alt="Pavel Popov"
+              style="border:0; box-shadow: 0px 0px 0px rgba(150, 150, 255, 1); margin-bottom: -5%" width="160px">
+            <div style="font-size:10pt;">Pavel Popov</div>
+          </div>
+          <h2>DECIFRA on schizophrenia</h2>
+          <p class="sub">fine-tuned to tell patients from controls, FBIRN</p>
+          <ul style="list-style-type: square; list-style-position: inside; font-size:44px; font-variant: small-caps; display: inline-block; text-align: left; white-space: nowrap;">
+            <li class="fragment">default mode, subcortical, cerebellum</li>
+            <li class="fragment">patients switch states more often</li>
+            <li class="fragment">same patterns in B-SNIP</li>
+          </ul>
+          <div class="slide-footer">
+            Popov P, Morasso C, Dolci G, Boscolo Galazzo I, Pearlson G, Danks D, Calhoun V, Menegaz G, Plis S. <a href="https://doi.org/10.1109/TMI.2026.3735891" target="_blank">Message in a bottleneck: interpretable deep learning for dynamic effective brain connectivity.</a> IEEE Transactions on Medical Imaging, 2026.
+          </div>
+          <aside class="notes">
+            FBIRN: three schizophrenia-specific patterns absent from the age analysis. Two involve default mode and subcortical networks, one the cerebellum.
+            Patients show more transitions between the subcortical and cerebellar states, and from them to the rest.
+            Replicated in B-SNIP. Caveat: antipsychotics may drive part of the subcortical effect.
+          </aside>
+        </section>
+
+        <section>
+          <h2>what do the edges mean?</h2>
+          <p class="sub">causally informed, not yet causal</p>
+          <ul style="list-style-type: square; list-style-position: inside; font-size:44px; font-variant: small-caps; display: inline-block; text-align: left; white-space: nowrap;">
+            <li class="fragment">no hidden confounders</li>
+            <li class="fragment">BOLD keeps the neural time order</li>
+            <li class="fragment">forecasting finds directed influence</li>
+          </ul>
+          <aside class="notes">
+            All cross-region mixing must pass through the transition matrix, and the matrix is trained to forecast the future.
+            That makes edges directed and grounded in time order. It does not make them verified causes.
+            Three assumptions stand between the two: causal sufficiency, time alignment of BOLD with neural dynamics
+            (hemodynamic response varies by region), and that forecasting captures influence, not just association.
+            Validation on systems with known causal structure is future work.
+          </aside>
         </section>
 
       </section>
@@ -459,8 +931,89 @@
 
         <section data-background="figures/multimodal_archinterp.svg" data-background-size="contain" data-vertical-align-top>
         </section>
+
+        <section>
+          <h3>counterfactuals through the bottleneck</h3>
+          <p class="sub">Monday's digital twin, with wiring you can read and cut</p>
+          <svg viewBox="0 0 900 400" style="width:100%; max-height:450px;" xmlns="http://www.w3.org/2000/svg" font-family="Lato, sans-serif" fill="#586e75">
+<defs><marker id="cfa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#586e75"/></marker><marker id="cfr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#cb4b16"/></marker></defs>
+<line x1="96.5" y1="85.0" x2="200.5" y2="65.5" stroke="#586e75" stroke-width="2.5" marker-end="url(#cfa)"/>
+<line x1="240.6" y1="84.8" x2="278.2" y2="172.4" stroke="#cb4b16" stroke-width="3.5" stroke-dasharray="7 7" marker-end="url(#cfr)"/>
+<circle cx="259.4" cy="128.6" r="15" fill="#fdf6e3" stroke="#cb4b16" stroke-width="2.5"/><path d="M253.4,122.6 l12,12 M265.4,122.6 l-12,12" stroke="#cb4b16" stroke-width="3" stroke-linecap="round"/>
+<line x1="173.4" y1="266.6" x2="264.0" y2="214.9" stroke="#586e75" stroke-width="2.5" marker-end="url(#cfa)"/>
+<line x1="62.8" y1="224.5" x2="124.7" y2="263.9" stroke="#586e75" stroke-width="2.5" marker-end="url(#cfa)"/>
+<line x1="63.5" y1="116.2" x2="47.3" y2="180.9" stroke="#586e75" stroke-width="2.5" marker-end="url(#cfa)"/>
+<line x1="139.5" y1="255.1" x2="81.6" y2="117.6" stroke="#586e75" stroke-width="2.5" marker-end="url(#cfa)"/>
+<line x1="220.8" y1="85.4" x2="160.3" y2="251.8" stroke="#586e75" stroke-width="2.5" marker-end="url(#cfa)"/>
+<circle cx="70" cy="90" r="24" fill="#eee8d5" stroke="#586e75" stroke-width="2.5"/>
+<circle cx="230" cy="60" r="24" fill="#eee8d5" stroke="#586e75" stroke-width="2.5"/>
+<circle cx="290" cy="200" r="24" fill="#eee8d5" stroke="#586e75" stroke-width="2.5"/>
+<circle cx="150" cy="280" r="24" fill="#eee8d5" stroke="#586e75" stroke-width="2.5"/>
+<circle cx="40" cy="210" r="24" fill="#eee8d5" stroke="#586e75" stroke-width="2.5"/>
+<path d="M345,170 L425,170" stroke="#93a1a1" stroke-width="5" marker-end="url(#cfa)" stroke-linecap="round"/>
+<line x1="470" y1="300" x2="880" y2="300" stroke="#93a1a1" stroke-width="1.4"/><text x="880" y="322" text-anchor="end" font-size="17" font-style="italic" fill="#93a1a1">time</text>
+<path d="M470.0,156.5 L473.4,153.7 L476.8,151.2 L480.2,148.9 L483.7,147.1 L487.1,145.5 L490.5,144.3 L493.9,143.5 L497.3,143.0 L500.8,142.8 L504.2,142.9 L507.6,143.2 L511.0,143.8 L514.4,144.6 L517.8,145.6 L521.2,146.7 L524.7,147.9 L528.1,149.1 L531.5,150.3 L534.9,151.5 L538.3,152.6 L541.8,153.6 L545.2,154.5 L548.6,155.2 L552.0,155.7 L555.4,156.0 L558.8,156.0 L562.2,155.9 L565.7,155.5 L569.1,155.0 L572.5,154.2 L575.9,153.3 L579.3,152.2 L582.8,151.0 L586.2,149.7 L589.6,148.4 L593.0,147.0 L596.4,145.7 L599.8,144.4 L603.2,143.3 L606.7,142.3 L610.1,141.5 L613.5,141.0 L616.9,140.7 L620.3,140.7 L623.8,141.0 L627.2,141.6 L630.6,142.6 L634.0,144.0 L637.4,145.7 L640.8,147.7 L644.2,150.1 L647.7,152.8 L651.1,155.8 L654.5,159.1 L657.9,162.5 L661.3,166.2 L664.8,170.0 L668.2,173.9 L671.6,177.8 L675.0,181.7 L678.4,185.6 L681.8,189.3 L685.2,192.9 L688.7,196.3 L692.1,199.5 L695.5,202.3 L698.9,204.8 L702.3,207.0 L705.8,208.8 L709.2,210.2 L712.6,211.2 L716.0,211.8 L719.4,212.0 L722.8,211.8 L726.2,211.2 L729.7,210.3 L733.1,209.1 L736.5,207.5 L739.9,205.7 L743.3,203.7 L746.8,201.5 L750.2,199.1 L753.6,196.7 L757.0,194.2 L760.4,191.8 L763.8,189.4 L767.2,187.0 L770.7,184.8 L774.1,182.8 L777.5,181.0 L780.9,179.3 L784.3,177.9 L787.8,176.7 L791.2,175.8 L794.6,175.1 L798.0,174.6 L801.4,174.4 L804.8,174.4 L808.2,174.5 L811.7,174.8 L815.1,175.2 L818.5,175.7 L821.9,176.3 L825.3,176.9 L828.8,177.4 L832.2,177.9 L835.6,178.2 L839.0,178.4 L842.4,178.5 L845.8,178.3 L849.2,177.9 L852.7,177.2 L856.1,176.3 L859.5,175.1 L862.9,173.6 L866.3,171.9 L869.8,169.8 L873.2,167.5 L876.6,165.0 L880.0,162.3" fill="none" stroke="#586e75" stroke-width="3.5" stroke-linejoin="round"/>
+<path d="M625.8,141.3 L627.9,142.8 L630.0,144.3 L632.2,146.0 L634.3,147.8 L636.4,149.6 L638.5,151.6 L640.6,153.6 L642.7,155.8 L644.9,158.0 L647.0,160.3 L649.1,162.6 L651.2,165.0 L653.3,167.4 L655.5,169.9 L657.6,172.4 L659.7,174.8 L661.8,177.3 L663.9,179.8 L666.0,182.2 L668.2,184.7 L670.3,187.0 L672.4,189.3 L674.5,191.6 L676.6,193.8 L678.8,195.9 L680.9,197.9 L683.0,199.8 L685.1,201.6 L687.2,203.3 L689.4,204.9 L691.5,206.4 L693.6,207.8 L695.7,209.0 L697.8,210.1 L699.9,211.1 L702.1,212.0 L704.2,212.8 L706.3,213.4 L708.4,213.9 L710.5,214.3 L712.7,214.6 L714.8,214.7 L716.9,214.8 L719.0,214.8 L721.1,214.7 L723.2,214.5 L725.4,214.3 L727.5,213.9 L729.6,213.6 L731.7,213.2 L733.8,212.7 L736.0,212.2 L738.1,211.7 L740.2,211.2 L742.3,210.7 L744.4,210.1 L746.5,209.6 L748.7,209.1 L750.8,208.7 L752.9,208.3 L755.0,207.9 L757.1,207.6 L759.3,207.3 L761.4,207.1 L763.5,207.0 L765.6,206.9 L767.7,206.9 L769.8,207.0 L772.0,207.2 L774.1,207.4 L776.2,207.7 L778.3,208.2 L780.4,208.6 L782.6,209.2 L784.7,209.9 L786.8,210.6 L788.9,211.4 L791.0,212.3 L793.1,213.2 L795.3,214.2 L797.4,215.3 L799.5,216.4 L801.6,217.6 L803.7,218.8 L805.9,220.0 L808.0,221.3 L810.1,222.7 L812.2,224.0 L814.3,225.4 L816.5,226.8 L818.6,228.2 L820.7,229.6 L822.8,231.1 L824.9,232.5 L827.0,233.9 L829.2,235.3 L831.3,236.7 L833.4,238.1 L835.5,239.4 L837.6,240.8 L839.8,242.1 L841.9,243.4 L844.0,244.6 L846.1,245.9 L848.2,247.1 L850.3,248.2 L852.5,249.4 L854.6,250.5 L856.7,251.6 L858.8,252.7 L860.9,253.7 L863.1,254.7 L865.2,255.7 L867.3,256.7 L869.4,257.6 L871.5,258.5 L873.6,259.4 L875.8,260.3 L877.9,261.2 L880.0,262.0" fill="none" stroke="#cb4b16" stroke-width="3.5" stroke-dasharray="9 6" stroke-linejoin="round"/>
+<line x1="625.8" x2="625.8" y1="70" y2="300" stroke="#93a1a1" stroke-width="1" stroke-dasharray="4 5"/><circle cx="625.8" cy="141.3" r="7" fill="#586e75"/>
+<text x="880" y="148.3" text-anchor="end" font-size="19" fill="#586e75">forecast</text>
+<text x="880" y="292.0" text-anchor="end" font-size="19" fill="#cb4b16">edge cut</text>
+<text x="165" y="375" text-anchor="middle" font-size="24" font-variant="small-caps" letter-spacing="1">cut an edge</text>
+<text x="385" y="375" text-anchor="middle" font-size="24" font-variant="small-caps" letter-spacing="1">re-run</text>
+<text x="675" y="375" text-anchor="middle" font-size="24" font-variant="small-caps" letter-spacing="1">compare</text>
+</svg>
+          <aside class="notes">
+            This is the counterfactual model from Monday's first talk. The difference: every prediction passes through a named graph,
+            so cutting or turning down an edge changes the forward simulation itself. Start from the same state, run both, compare.
+            These are model-based counterfactuals. They are valid only as far as the learned graph captures the process that made the data.
+            DECIFRA has the algebra in place. Nobody has run the edge edits yet. Open direction.
+          </aside>
+        </section>
+
+        <section>
+          <h2>open problems</h2>
+          <ul style="list-style-type: square; list-style-position: inside; font-size:37px; font-variant: small-caps; display: inline-block; text-align: left; white-space: nowrap;">
+            <li class="fragment">does the model really use the graph?</li>
+            <li class="fragment">a layer that learns an interventional causal graph?</li>
+            <li class="fragment">a black-box encoder with interpretable nodes?</li>
+            <li class="fragment">nodes as independent mechanisms?</li>
+            <li class="fragment">where is the ground truth?</li>
+          </ul>
+          <div class="slide-footer">
+            Xiao Y, Silva RF, Baker BT, Calhoun VD, Plis SM. <a href="https://doi.org/10.1109/ICIP61757.2026.11630019" target="_blank">Batch perfect: BSS via structured local covariance.</a> IEEE ICIP, 2026.
+          </div>
+          <aside class="notes">
+            1. Evidence so far: the 5% result and the identity ablation. No proof yet.
+            2. How to construct a layer that learns a causal graph in the interventional sense?
+            3. How to use a truly black-box encoder and still get the model to learn interpretable nodes?
+            4. How to make sure the nodes are independent mechanisms?
+            Nodes: an edge is only as readable as its nodes. Today ICA gives the nodes meaning before the model sees them.
+            JDX is a differentiable way to impose independence on any layer, so nodes can be learned and stay readable.
+            Mention the Monday poster from Yu-Ping Wang's group: they do ArchInterp without the name.
+            The point of this talk: the approach has a name now. Come work on it.
+          </aside>
+        </section>
       </section>
 
+
+      <section>
+        <section>
+          <h3>take home</h3>
+          <p class="sub" style="font-size: 0.8em; margin-top: 10px;">making your model predict through something you can read?</p>
+          <h2 class="fragment" style="white-space: nowrap;">that is architected interpretability</h2>
+          <h1 class="fragment" style="white-space: nowrap; font-size: 3em; margin-top: 30px;">let's do ArchInterp!</h1>
+          <div class="slide-footer" style="font-size: 15px; text-align: center;">
+            Supported by NIH R01MH129047 and 2R01EB006841, NSF 2112455, and DoD HT942524-25-1-0954
+          </div>
+          <div class="qr-follow qr-corner">
+            <img width="130" src="figures/qr_talkinterp.svg" alt="QR code for neuroneural.net/talkinterp">
+            slides
+          </div>
+          <aside class="notes">
+            If you were building or mulling something like this, now you know what you were into: architected interpretability.
+            Mention the Monday poster from Yu-Ping Wang's group.
+          </aside>
+        </section>
+      </section>
 
       <section>
         <section data-background="figures/the_team25.svg" data-background-size="contain" data-vertical-align-top>
